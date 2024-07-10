@@ -1,5 +1,7 @@
 package com.emailclient;
 
+import com.emailclient.view.ViewFactory;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,25 +22,10 @@ public class Launcher extends Application{
     @Override
     // start method starts the entire program
     public void start(Stage stage) throws Exception {
-        // // Button variable necessary to put the button on the frame
-        // Button button = new Button("Click!");
-        // // Below this is the setOnAction method for the button. When the button is clicked, 
-        // // It will do whatever action is set. In this case, System.out.println("button clicked");
-        // button.setOnAction(e -> {
-        //     System.out.println("Button Clicked!");
-        // });
+        
+        ViewFactory viewFactory = new ViewFactory(new EmailManager());
 
-        // // This will hold the controller objects (Like the button above)
-        // StackPane stackPane = new StackPane();
-        // stackPane.getChildren().add(button);
+        viewFactory.showLoginWindow();
 
-        Parent parent = FXMLLoader.load(getClass().getResource("view/LoginWindow.fxml"));
-
-        // Scene is needed to set the JavaFX scene with the given stackPane, and width + height args. 
-        Scene scene = new Scene(parent, 510, 325);
-        stage.setScene(scene);
-
-        // Shows the final stage 
-        stage.show();
     }
 }
