@@ -1,6 +1,7 @@
 package com.emailclient.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.emailclient.EmailManager;
 import com.emailclient.controller.BaseController;
@@ -16,14 +17,15 @@ import javafx.stage.Stage;
 public class ViewFactory {
 
     private EmailManager emailManager;
-
+    private ArrayList<Stage> activeStages;
     // Constructor
     public ViewFactory(EmailManager emailManager) {
         this.emailManager = emailManager;
+        activeStages = new ArrayList<Stage>();
     }
     
     // View options handling
-    private ColorTheme colorTheme = ColorTheme.DEFAULT;
+    private ColorTheme colorTheme = ColorTheme.DARK;
     private FontSize fontSize = FontSize.MEDIUM;
 
     public ColorTheme getColorTheme() {
@@ -84,9 +86,21 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
+        activeStages.add(stage);
     }
 
     public void closeStage(Stage stageToClose) {
         stageToClose.close();
+        activeStages.remove(stageToClose);
+    }
+
+    public void updateStyles() {
+        for(Stage stage: activeStages) {
+            Scene scene = stage.getScene();
+            // Handle the CSS
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource(ColorTheme.getCssPath(colorTheme)).toExternalForm());
+            scene.getStylesheets().add(getClass().getResource(FontSize.getCssPath(fontSize)).toExternalForm());
+        }
     }
 }
