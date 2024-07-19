@@ -3,6 +3,8 @@ module com.emailclient {
     requires javafx.fxml;
     requires javafx.graphics;
     requires javafx.web;
+    requires activation;
+    requires java.mail;
 
     opens com.emailclient to javafx.fxml;
     exports com.emailclient;
