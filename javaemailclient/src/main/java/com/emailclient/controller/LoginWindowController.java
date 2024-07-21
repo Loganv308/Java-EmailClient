@@ -30,7 +30,7 @@ public class LoginWindowController extends BaseController{
     }
 
     @FXML
-    void loginButtonAction() {
+    void loginButtonAction() { 
         System.out.println("loginButtonAction!");
         
         if(fieldsAreValid()){
