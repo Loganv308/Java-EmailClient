@@ -10,4 +10,5 @@ module com.emailclient {
     exports com.emailclient;
     opens com.emailclient.view;
     opens com.emailclient.controller;
+    opens com.emailclient.model;
 }
