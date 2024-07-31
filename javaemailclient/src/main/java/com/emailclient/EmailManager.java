@@ -22,27 +22,21 @@ public class EmailManager {
     private EmailMessage selectedMessage;
     private EmailTreeItem<String> selectedFolder;
     private ObservableList<EmailAccount> emailAccounts = FXCollections.observableArrayList();
-<<<<<<< HEAD
-=======
     private IconResolver iconResolver = new IconResolver();
->>>>>>> 06faa69 (Added folder resolver class, icons to different elements, added run script to run program easily.)
 
     private FolderUpdaterService folderUpdaterService;
     private List<Folder> folderList = new ArrayList<Folder>();
 
-
     // Folder handler
     private EmailTreeItem<String> foldersRoot = new EmailTreeItem<String>("");
-    
+
     public EmailTreeItem<String> getFoldersRoot() {
         return foldersRoot;
     }
-    
+
     public ObservableList<EmailAccount> getEmailAccounts() {
         return emailAccounts;
     }
-
-    public ObservableList<EmailAccount> getEmailAccounts() { return emailAccounts; }
 
     public EmailMessage getSelectedMessage() {
         return selectedMessage;
@@ -59,12 +53,12 @@ public class EmailManager {
     public void setSelectedFolder(EmailTreeItem<String> selectedFolder) {
         this.selectedFolder = selectedFolder;
     }
-    
+
     public List<Folder> getFolderList() {
         return this.folderList;
     }
 
-    public EmailManager(){
+    public EmailManager() {
         folderUpdaterService = new FolderUpdaterService(folderList);
         folderUpdaterService.start();
     }
@@ -73,7 +67,8 @@ public class EmailManager {
         emailAccounts.add(emailAccount);
         EmailTreeItem<String> treeItem = new EmailTreeItem<>(emailAccount.getAddress());
         treeItem.setGraphic(iconResolver.getIconForFolder(emailAccount.getAddress()));
-        FetchFoldersService fetchFoldersService = new FetchFoldersService(emailAccount.getStore(), treeItem, folderList);
+        FetchFoldersService fetchFoldersService = new FetchFoldersService(emailAccount.getStore(), treeItem,
+                folderList);
         fetchFoldersService.start();
         foldersRoot.getChildren().add(treeItem);
     }
