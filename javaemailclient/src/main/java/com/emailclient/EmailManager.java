@@ -11,6 +11,7 @@ import com.emailclient.controller.services.FolderUpdaterService;
 import com.emailclient.model.EmailAccount;
 import com.emailclient.model.EmailMessage;
 import com.emailclient.model.EmailTreeItem;
+import com.emailclient.view.IconResolver;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,17 +22,18 @@ public class EmailManager {
     private EmailMessage selectedMessage;
     private EmailTreeItem<String> selectedFolder;
     private ObservableList<EmailAccount> emailAccounts = FXCollections.observableArrayList();
+    private IconResolver iconResolver = new IconResolver();
 
     private FolderUpdaterService folderUpdaterService;
     private List<Folder> folderList = new ArrayList<Folder>();
 
     // Folder handler
     private EmailTreeItem<String> foldersRoot = new EmailTreeItem<String>("");
-    
+
     public EmailTreeItem<String> getFoldersRoot() {
         return foldersRoot;
     }
-    
+
     public ObservableList<EmailAccount> getEmailAccounts() {
         return emailAccounts;
     }
@@ -51,12 +53,12 @@ public class EmailManager {
     public void setSelectedFolder(EmailTreeItem<String> selectedFolder) {
         this.selectedFolder = selectedFolder;
     }
-    
+
     public List<Folder> getFolderList() {
         return this.folderList;
     }
 
-    public EmailManager(){
+    public EmailManager() {
         folderUpdaterService = new FolderUpdaterService(folderList);
         folderUpdaterService.start();
     }
@@ -64,7 +66,9 @@ public class EmailManager {
     public void addEmailAccount(EmailAccount emailAccount) {
         emailAccounts.add(emailAccount);
         EmailTreeItem<String> treeItem = new EmailTreeItem<>(emailAccount.getAddress());
-        FetchFoldersService fetchFoldersService = new FetchFoldersService(emailAccount.getStore(), treeItem, folderList);
+        treeItem.setGraphic(iconResolver.getIconForFolder(emailAccount.getAddress()));
+        FetchFoldersService fetchFoldersService = new FetchFoldersService(emailAccount.getStore(), treeItem,
+                folderList);
         fetchFoldersService.start();
         foldersRoot.getChildren().add(treeItem);
     }
