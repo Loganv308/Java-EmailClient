@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.emailclient.EmailManager;
 import com.emailclient.controller.BaseController;
 import com.emailclient.controller.ComposeMessageController;
+import com.emailclient.controller.EmailDetailsController;
 import com.emailclient.controller.LoginWindowController;
 import com.emailclient.controller.MainWindowController;
 import com.emailclient.controller.OptionsWindowController;
@@ -69,7 +70,7 @@ public class ViewFactory {
     }
 
     public void showOptionsWindow() {
-        System.out.println("Main Window called");
+        System.out.println("Options Window called");
     
         BaseController controller = new OptionsWindowController(emailManager, this, "OptionsWindow.fxml");
 
@@ -80,6 +81,14 @@ public class ViewFactory {
         System.out.println("Compose Message Window called");
     
         BaseController controller = new ComposeMessageController(emailManager, this, "ComposeMessageWindow.fxml");
+
+        initializeStage(controller);
+    }
+
+    public void showEmailDetailsWindow() {
+        System.out.println("Email Details Window called");
+    
+        BaseController controller = new EmailDetailsController(emailManager, this, "EmailDetailsWindow.fxml");
 
         initializeStage(controller);
     }

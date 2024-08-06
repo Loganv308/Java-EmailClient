@@ -28,7 +28,7 @@ public class EmailTreeItem<String> extends TreeItem<String> {
     public void addEmail(Message message) throws MessagingException {
         EmailMessage emailMessage = fetchMessage(message);
         emailMessages.add(emailMessage);
-        System.out.println("Added to " + name + " " + message.getSubject());
+        // System.out.println("Added to " + name + " " + message.getSubject());
     }
 
     public void addEmailToTop(Message message) throws MessagingException {
