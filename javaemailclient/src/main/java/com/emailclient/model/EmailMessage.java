@@ -26,6 +26,7 @@ public class EmailMessage {
     private List<MimeBodyPart> attachmentList = new ArrayList<MimeBodyPart>();
     private boolean hasAttachments = false;
 
+
     public EmailMessage(String subject, String sender, String recipient, int size, Date date, boolean isRead, Message message){
         this.subject = new SimpleStringProperty(subject);
         this.sender = new SimpleStringProperty(sender);
@@ -35,6 +36,10 @@ public class EmailMessage {
         this.isRead = isRead;
         this.message = message;
     }   
+
+    public boolean  hasAttachments() {
+        return hasAttachments;
+    }
 
     // Only need the getters for JavaFX
     public String getSubject(){
@@ -67,6 +72,10 @@ public class EmailMessage {
 
     public Message getMessage() {
         return this.message;
+    }
+
+    public List<MimeBodyPart> getAttachmentList() {
+        return attachmentList;
     }
 
     public void addAttachment(MimeBodyPart mbp) throws MessagingException {

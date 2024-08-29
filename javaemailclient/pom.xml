@@ -10,7 +10,6 @@
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
     <dependencies>
-
         <dependency>
             <groupId>org.jfxcore</groupId>
             <artifactId>javafx-web</artifactId>
