@@ -82,6 +82,7 @@ public class LoginWindowController extends BaseController implements Initializab
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         emailAddressField.setText("loganv308@gmail.com");
+        // The password (key) below has been changed. Google makes it impossible to find where this was created to revoke access. 
         passwordField.setText("qvlhvbdcsfzgasln");
     }
 }
